@@ -4,9 +4,13 @@ import java.util.*;
 
 public class StackInt {
 	private LinkedList<Integer> number = new LinkedList<>();
+	private LinkedList<Integer> maxStack = new LinkedList<>();
 
 	public void push(int num) {
 		number.add(num);
+		if (maxStack.isEmpty() || num >= maxStack.getLast()) {
+			maxStack.add(num);
+		}
 	}
 
 	public int pop() {
@@ -21,15 +25,11 @@ public class StackInt {
 		return number.isEmpty();
 	}
 
-//I cannot understand how to make complexity O[1].
 	public int max() {
-		int max = number.getFirst();
-		for (int num : number) {
-			if (num > max) {
-				max = num;
-			}
+		if (maxStack.isEmpty()) {
+			throw new NoSuchElementException();
 		}
-		return max;
+		return maxStack.getLast();
 	}
 
 }

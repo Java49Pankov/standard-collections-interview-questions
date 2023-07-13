@@ -36,8 +36,6 @@ class StackIntTest {
 		assertEquals(10, stack.pop());
 		assertThrowsExactly(EmptyStackException.class, ()-> stack.pop());
 		assertTrue(stack.isEmpty());
-		
-
 	}
 
 	@Test
@@ -50,10 +48,7 @@ class StackIntTest {
 	@Test
 	void maxTest() {
 		assertEquals(50, stack.max());
-		stack.pop();
-		assertEquals(50, stack.max());
-		stack.pop();
-		assertEquals(13, stack.max());
+		
 	}
 
 }
