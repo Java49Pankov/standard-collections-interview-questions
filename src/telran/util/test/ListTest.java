@@ -24,7 +24,7 @@ class ListTest {
 	}
 
 	@Test
-	void uodateListTest() {
+	void updateListTest() {
 		assertThrowsExactly(UnsupportedOperationException.class, () -> immutableList.remove(0));
 		List<Integer> subList = mutableList.subList(2, 5);
 		subList.clear();
@@ -39,19 +39,6 @@ class ListTest {
 		assertArrayEquals(expected3, mutableList.toArray(Integer[]::new));
 		Integer[] expected4 = { -50, 17, 500 };
 		assertArrayEquals(expected4, subList.toArray(Integer[]::new));
-//		Integer[] expected5 = { -50, 17, 500,20 };
-//		mutableList.add(20);
-//		assertArrayEquals(expected5, subList.toArray(Integer[]::new));
-//		Integer[] expected6 = { -50, 17, 20 };
-//		mutableList.set(4, 20);
-//		assertArrayEquals(expected6, subList.toArray(Integer[]::new));
-//		Integer[] expected7 = { -50, 17 };
-//		subList.remove(2);
-//		assertArrayEquals(expected7, subList.toArray(Integer[]::new));
-//		subList.remove(2);
-//		List<Integer> subList2 = mutableList.subList(0, 2);
-//		subList.add(40);
-//		System.out.println(subList2);
 	}
 
 	@Test
@@ -62,72 +49,11 @@ class ListTest {
 		assertEquals(10, stack.pop());
 		assertTrue(stack.isEmpty());
 	}
-	
+
 	@Test
 	void queueTest() {
 		Queue<Integer> queue = new LinkedList<>();
 		assertThrowsExactly(NoSuchElementException.class, () -> queue.remove());
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

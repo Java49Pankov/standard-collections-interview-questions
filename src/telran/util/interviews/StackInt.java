@@ -1,48 +1,35 @@
 package telran.util.interviews;
 
-/**
- * 
- * All methods have to have the Complexity O[1]
- *
- */
+import java.util.*;
+
 public class StackInt {
-//TODO fields
-	/**
-	 * 
-	 * @param num adds num in the stack
-	 */
+	private LinkedList<Integer> number = new LinkedList<>();
+
 	public void push(int num) {
-		// TODO
+		number.add(num);
 	}
 
-	/**
-	 * 
-	 * @return takes out and returns the top stack number in the case the stack is
-	 *         empty the exception of the class NoSuchElement show
-	 */
 	public int pop() {
-		// TODO
-		return 0;
+		if (number.isEmpty()) {
+			throw new EmptyStackException();
+		}
+		int removeElement = number.removeLast();
+		return removeElement;
 	}
 
-	/**
-	 * 
-	 * @return true if the stack is empty
-	 * 
-	 */
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return number.isEmpty();
 	}
 
-	/**
-	 * 
-	 * @return maximal value existing in the stack throws NoSuchElementException in
-	 *         the case the stack is empty
-	 */
+//I cannot understand how to make complexity O[1].
 	public int max() {
-		// TODO
-		return 0;
+		int max = number.getFirst();
+		for (int num : number) {
+			if (num > max) {
+				max = num;
+			}
+		}
+		return max;
 	}
 
 }
