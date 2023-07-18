@@ -10,7 +10,7 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import telran.util.interviews.*;
+import telran.interviews.*;
 
 class StackIntTest {
 	private static final long N_NUMBERS = 10000;
