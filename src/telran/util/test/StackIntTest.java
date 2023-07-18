@@ -10,7 +10,7 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import telran.util.interviews.*;
+import telran.interviews.StackInt;
 
 class StackIntTest {
 	private static final long N_NUMBERS = 10000;
@@ -20,19 +20,19 @@ class StackIntTest {
 	LinkedList<Integer> list = new LinkedList<>();
 	StackInt stackEmpty = new StackInt();
 	Random gen = new Random();
-
-	@BeforeEach
-	void setUp() throws Exception {
-		gen.ints(N_NUMBERS, MIN_NUMBER, MAX_NUMBER).forEach(n -> {
-			stack.push(n);
-			list.add(n);
-		});
-	}
-
+		@BeforeEach
+		void setUp() throws Exception {
+			gen.ints(N_NUMBERS, MIN_NUMBER, MAX_NUMBER).
+					forEach(n -> {
+						stack.push(n);
+						list.add(n);
+					});
+		}
 	@Test
 	void testPop() {
 		assertEquals(list.removeLast(), stack.pop());
-		assertThrows(NoSuchElementException.class, () -> stackEmpty.pop());
+		
+		assertThrows(NoSuchElementException.class, ()-> stackEmpty.pop());
 	}
 
 	@Test
@@ -52,7 +52,6 @@ class StackIntTest {
 		testRandom();
 		predefinedMaxTest();
 	}
-
 	void testRandom() {
 		for (int i = 0; i < N_NUMBERS; i++) {
 			if (Math.random() * 100 < 50) {
@@ -60,26 +59,29 @@ class StackIntTest {
 					stack.pop();
 					list.removeLast();
 				} catch (Exception e) {
+					
 				}
-			} else {
-				int number = gen.nextInt(MIN_NUMBER, MAX_NUMBER);
+				
+			}
+			else {
+				int number =  gen.nextInt(MIN_NUMBER, MAX_NUMBER);
+				
 				stack.push(number);
 				list.add(number);
 			}
 		}
-		assertEquals((int) Collections.max(list), stack.max());
+		assertEquals((int)Collections.max(list), stack.max());
 	}
-
 	void predefinedMaxTest() {
-		int ar[] = { 100000, 50000, 100000, 20, 20, 20, 2000000 };
+		int ar[]= {100000,50000,100000,20,20,20,2000000};
+		StackInt stack = new StackInt();
 		for (int i = 0; i < ar.length; i++) {
 			stack.push(ar[i]);
 		}
 		assertEquals(2000000, stack.max());
-		stack.pop();
-		stack.pop();
-		stack.pop();
+		stack.pop();stack.pop();stack.pop();
 		assertEquals(100000, stack.max());
 	}
+	
 
 }
