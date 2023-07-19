@@ -28,16 +28,8 @@ class ConnectionsPoolImplTest {
 	void addConnection() {
 		// trying to add an existing element
 		assertFalse(pool.addConnection(new Connection(33, "ccc", 3)));
-
-		
-
 		// added element to full pool
 		assertTrue(pool.addConnection(new Connection(66, "fff", 6)));
-
-		
-
-		
-
 		// checked that this element was removed from the pool and it can be added again
 		assertTrue(pool.addConnection(new Connection(11, "aaa", 1)));
 
@@ -47,21 +39,14 @@ class ConnectionsPoolImplTest {
 	void getConnection() {
 		// take the last element and check that it is the first
 		Connection con55 = pool.getConnection(55);
-		
-
 		// take the penultimate element and check that it became the last
 		Connection con44 = pool.getConnection(44);
-		
-
 		assertEquals(33, pool.getConnection(33).id);
-
 		assertEquals("bbb", pool.getConnection(22).ipAddress);
 		assertEquals(2, pool.getConnection(22).port);
-
 		// take a non-existent element
 		assertNull(pool.getConnection(99));
 
 	}
-
 
 }
