@@ -22,5 +22,8 @@ public class Connection {
 	public int getPort() {
 		return port;
 	}
+	public String toString() {
+	    return "Connection[id=" + id + ", ipAddress=" + ipAddress + ", port=" + port + "]";
+	}
 
 }
