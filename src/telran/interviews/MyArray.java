@@ -3,32 +3,32 @@ package telran.interviews;
 import java.util.HashMap;
 
 public class MyArray<T> {
-
-	private T array;
+	private T allValues;
 	private int size;
-	private HashMap<Integer, T> myArray;
+	private HashMap<Integer, T> mapOfSets;
 
 	public MyArray(int size) {
 		this.size = size;
-		myArray = new HashMap<>();
+		mapOfSets = new HashMap<>();
 	}
 
 	public void setAll(T value) {
-		array = value;
+		mapOfSets = new HashMap<>();
+		allValues = value;
 	}
 
 	public T get(int index) {
 		T res = null;
-		if (index > 0 || index < size) {
-			res = myArray.getOrDefault(index, array);
+		if (index > -1 && index < size) {
+			res = mapOfSets.getOrDefault(index, allValues);
 		}
 		return res;
 	}
 
 	public void set(int index, T value) {
 		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException(index);
 		}
-		myArray.put(index, value);
+		mapOfSets.put(index, value);
 	}
 }

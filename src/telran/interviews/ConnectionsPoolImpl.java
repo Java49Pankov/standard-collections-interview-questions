@@ -3,41 +3,30 @@ package telran.interviews;
 import java.util.*;
 
 public class ConnectionsPoolImpl implements ConnectionsPool {
-	LinkedHashMap<Integer, Connection> map;
 	int limit;
+	LinkedHashMap<Integer, Connection> connections = new LinkedHashMap<>(16, 0.75f, true) {
+		@Override
+		protected boolean removeEldestEntry(Map.Entry<Integer, Connection> eldestEntry) {
+			return size() > limit;
+		}
+	};
 
 	public ConnectionsPoolImpl(int limit) {
-		if (limit <= 0) {
-			throw new IllegalArgumentException("limit must be gratter 0");
-		}
 		this.limit = limit;
-		map = new LinkedHashMap<>(16, .75f, true) {
-			protected boolean removeEldestEntry(Map.Entry<Integer, Connection> eldest) {
-				return size() > limit;
-			}
-		};
 	}
 
 	@Override
 	public boolean addConnection(Connection connection) {
-		if (connection == null) {
-			throw new NoSuchElementException();
+		boolean res = false;
+		if (!connections.containsKey(connection.getId())) {
+			res = true;
+			connections.put(connection.getId(), connection);
 		}
-		return map.putIfAbsent(connection.getId(), connection) == null;
+		return res;
 	}
 
 	@Override
 	public Connection getConnection(int id) {
-		return map.get(id);
+		return connections.get(id);
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (Connection connection : map.values()) {
-			sb.append(connection.toString()).append("\n");
-		}
-		return sb.toString();
-	}
-
 }

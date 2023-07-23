@@ -23,7 +23,6 @@ class MultiCountersTest {
 		multiCounters.addItem(123);
 		multiCounters.addItem(123);
 		multiCounters.addItem("b");
-
 	}
 
 	@Test
@@ -32,7 +31,6 @@ class MultiCountersTest {
 		assertEquals(1, multiCounters.addItem("abcd12"));
 		assertEquals(1, multiCounters.addItem(LocalDate.now()));
 		assertEquals(2, multiCounters.addItem(LocalDate.now()));
-
 	}
 
 	@Test
@@ -63,16 +61,13 @@ class MultiCountersTest {
 		runArraySet(expected2, multiCounters.getMaxItems());
 		multiCounters.remove("b");
 		runArraySet(new Object[0], multiCounters.getMaxItems());
-
 	}
 
 	private void runArraySet(Object[] expected, Set<Object> maxItems) {
 		assertEquals(expected.length, maxItems.size());
 		for (Object item : expected) {
-//			System.out.println(maxItems.toString());
 			assertTrue(maxItems.contains(item));
 		}
-
 	}
 
 }

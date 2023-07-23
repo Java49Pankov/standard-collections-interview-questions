@@ -1,27 +1,28 @@
 package telran.interviews;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 public class MultiCountersImpl implements MultiCounters {
 	HashMap<Object, Integer> items = new HashMap<>();
-	TreeMap<Integer, HashSet<Object>> map = new TreeMap<>();
+	TreeMap<Integer, HashSet<Object>> counters = new TreeMap<>();
 
 	@Override
 	public Integer addItem(Object item) {
-		HashSet<Object> countSet = new HashSet<>();
-		Integer count = items.merge(item, 1, (a, b) -> a + b);
-		map.computeIfAbsent(count, k -> countSet).add(item);
-		int setKey = count - 1;
-		Set<Object> set = map.get(setKey);
-		if (set != null) {
-			set.remove(item);
-			if (set.isEmpty()) {
-				map.remove(setKey);
-			}
+		Integer res = items.merge(item, 1, Integer::sum);
+		if (res > 1) {
+			counterItemsRemove(res - 1, item);
 		}
-//		System.out.println(items);
-//		System.out.println(map);
-		return count;
+		counters.computeIfAbsent(res, e -> new HashSet<>()).add(item);
+		return res;
+	}
+
+	private void counterItemsRemove(int counter, Object item) {
+		HashSet<Object> set = counters.get(counter);
+		set.remove(item);
+		if (set.isEmpty()) {
+			counters.remove(counter);
+		}
 	}
 
 	@Override
@@ -31,25 +32,17 @@ public class MultiCountersImpl implements MultiCounters {
 
 	@Override
 	public boolean remove(Object item) {
-		boolean res = false;
-		Integer count = items.remove(item);
-		if (count != null) {
-			HashSet<Object> countSet = map.get(count);
-			countSet.remove(item);
-			if (countSet.isEmpty()) {
-				map.remove(count);
-			}
-//			System.out.println(map.lastKey());
-			res = true;
+		Integer counter = items.remove(item);
+		if (counter != null) {
+			counterItemsRemove(counter, item);
 		}
-		return res;
+		return counter != null;
 	}
 
 	@Override
 	public Set<Object> getMaxItems() {
-//		System.out.println(items);
-		System.out.println(map);
-		return map.isEmpty() ? new HashSet<>() : map.get(map.lastKey());
+		Entry<Integer, HashSet<Object>> maxCounter = counters.lastEntry();
+		return maxCounter != null ? maxCounter.getValue() : Collections.emptySet();
 	}
 
 }

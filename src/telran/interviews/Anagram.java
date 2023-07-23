@@ -3,35 +3,26 @@ package telran.interviews;
 import java.util.HashMap;
 
 public class Anagram {
-
+	
 	public static boolean isAnagram(String word, String anagram) {
 		if (word.length() != anagram.length()) {
 			return false;
 		}
-		boolean res = true;
-		String[] arrWord = word.split("");
-		String[] arrAnagram = anagram.split("");
-		HashMap<String, Integer> wordMap = getMap(arrWord);
-		for (String str : arrAnagram) {
-			if (wordMap.containsKey(str)) {
-				int count = wordMap.get(str);
-				if (count == 0) {
-					res = false;
-				}
-				wordMap.put(str, count - 1);
-			} else {
-				res = false;
-			}
+		HashMap<Character, Integer> charCountsMap = getCharCounts(word);
+		for (char c : anagram.toCharArray()) {
+
+			if (charCountsMap.compute(c, (k, v) -> v == null ? -1 : v - 1) < 0)
+				return false;
 		}
-		return res;
+		return true;
 	}
 
-	private static HashMap<String, Integer> getMap(String[] arrWord) {
-		HashMap<String, Integer> map = new HashMap<>();
-		for (String str : arrWord) {
-			map.merge(str, 1, (a, b) -> a + b);
+	private static HashMap<Character, Integer> getCharCounts(String word) {
+		HashMap<Character, Integer> res = new HashMap<>();
+		for (char c : word.toCharArray()) {
+			res.merge(c, 1, (a, b) -> a + b);
 		}
-		return map;
+		return res;
 	}
 
 }
