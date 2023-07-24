@@ -19,8 +19,23 @@ class StreamTasksTests {
 	}
 
 	@Test
+	public void sumGroupTest() {
+		int[][] groups = { { 1, 2 }, { 3, 4, 5 } };
+		int expected = 15;
+		assertEquals(expected, sumGroups(groups));
+		int[][] groups1 = { { -1, -2, -3 }, { 4, 5 } };
+		int expected2 = 3;
+		assertEquals(expected2, sumGroups(groups1));
+	}
+
+	@Test
 	void displayOddEvenGroupingTest() {
 		displayOddEvenGroup(20);
+	}
+
+	@Test
+	void prontDigitStatisticsTest() {
+		printDigitStatistics(1_000_000);
 	}
 
 }
