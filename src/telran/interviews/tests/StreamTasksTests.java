@@ -44,4 +44,42 @@ class StreamTasksTests {
 	void printDigitStatisticsTest_1() {
 		printDigitStatistics_1();
 	}
+	
+	@Test
+	void displayPersonsMapTest() {
+		System.out.println(getRandomPersonsMap(5));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
