@@ -3,6 +3,7 @@ package telran.interviews.tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static telran.interviews.StreamTasks.*;
 
@@ -34,8 +35,13 @@ class StreamTasksTests {
 	}
 
 	@Test
-	void prontDigitStatisticsTest() {
-		printDigitStatistics(1_000_000);
+	void printDigitStatisticsTest() {
+		printDigitStatistics();
 	}
 
+	@Disabled
+	@Test
+	void printDigitStatisticsTest_1() {
+		printDigitStatistics_1();
+	}
 }
